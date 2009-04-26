@@ -69,6 +69,8 @@ function getDomain(url) {
 
   var split = current_URL.split('.'); //location.hostname.split('.');
   var domain = [split.pop()];
+  var item;
+
   while (item = split.pop()) {
     domain.unshift(item);
     if (item.length > 2) {
