@@ -44,7 +44,7 @@ function generatePassword() {
       password = str_md4(key+data);
       break;
     case "md5":
-      password = str_md5(key+data);
+      password = hex_md5(key+data);
       break;
   }
 
@@ -129,6 +129,15 @@ function setCharset(charset) {
 		$('#charset').cookify({hoursToLive: TIME_UNTIL_EXPIRY});
 	});
 </script>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-7482154-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
 </head>
 <body>
 
