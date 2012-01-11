@@ -29,6 +29,18 @@ Then push the repository to heroku and open it in your browser.
      $ git push heroku master
      $ heroku open
 
+Now for the tricky part. The bookmarklet will automatically use my demo site for dash. If you want it to point to your install of dash, you'll need to edit some code. Grab the URL for your copy of dash on Heroku. Near the bottom of public/index.html you'll find the spot where your URL should go.
+
+Replace
+
+     "http://floating-meadow-2480.heroku.com?"
+
+with
+
+     "http://mydomain.heroku.com?"
+
+Don't forget the quotes and the question mark.
+
 ## What's next?
 
 I've only tested this on Google Chrome using OSX Lion and OSX Snow Leopard. Got it working in a different environment? Let me know!
