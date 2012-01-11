@@ -17,42 +17,45 @@
         
 <script type="text/javascript">
 
-var base93="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789`~!@#$%^&*()_-+={}|[]\\:\";\'<>?,./";
-var base64="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"; //RFC 1421
-var base62="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-var base32="ABCDEFGHIJKLMNOPQRSTUVWXYZ234567"; //RFC 3548
-var base16="0123456789ABCDEF";
-
-var alphanumeric=base62+"MM";
-var strong="ABCDEFGHJKLMNPQRSTUVWabcdefghijkmnopqrstuvw0123456789+/-_*()[]{}";
+  var STRONG = 'ABCDEFGHJKLMNPQRSTUVWabcdefghijkmnopqrstuvw0123456789+/-_*()[]{}'
+  var WEAK =   'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
 
   var TIME_UNTIL_EXPIRY = 24 * 7 ; // 7 days
   var DEFAULT_LENGTH = "12";
-  var DEFAULT_HASH = "md5";
-  var DEFAULT_CHARSET = strong;
+  var DEFAULT_HASH = "sha256";
+  var DEFAULT_CHARSET = STRONG;
   
 function generatePassword() {
   var password = "";
   var hashAlgorithm = $('#hash').val();
-  var key = $('#master').val();
+  var key = encrypt(hashAlgorithm, $('#master').val());
   var data = $('#url').val();
-
-  switch(hashAlgorithm) {
-    case "sha1":
-      password = str_sha1(key+data);
-      break;
-    case "md4":
-      password = str_md4(key+data);
-      break;
-    case "md5":
-      password = hex_md5(key+data);
-      break;
-  }
-
+  
+  var password = encrypt(hashAlgorithm, key + data);
   password = base64_encode(password, $('#charset').val());
   password = password.substring(0, $('#length').val());
 
   $('#hashword').val(password);
+}
+
+function encrypt(hashAlgorithm, data) {
+  var encrypted_string;
+
+  switch(hashAlgorithm) {
+    case "sha1":
+      encrypted_string = str_sha1(data);
+      break;
+    case "md4":
+      encrypted_string = str_md4(data);
+      break;
+    case "md5":
+      encrypted_string = hex_md5(data);
+      break;
+    case "sha256":
+      encrypted_string = hex_sha256(data);
+      break;
+  }
+  return encrypted_string;
 }
 
 function getDomain(url) {
@@ -110,11 +113,11 @@ function setCharset(charset) {
 		$("#settings a").click(function(e){
 		  e.preventDefault();
 			switch($(this).html()) {
-		    case "AlphaNumeric":
-		      $('#charset').val(alphanumeric);
+		    case "Weak":
+		      $('#charset').val(WEAK);
 		      break;
 		    case "Strong":
-		      $('#charset').val(strong);
+		      $('#charset').val(STRONG);
 		      break;
 		  }
 		  generatePassword();
@@ -175,6 +178,7 @@ pageTracker._trackPageview();
               <option value="md4">MD4</option>
               <option value="md5">MD5</option>
               <option value="sha1">SHA-1</option>
+              <option value="sha256">SHA-256</option>
               </select>
               </td>
               </tr>
@@ -189,8 +193,8 @@ pageTracker._trackPageview();
               <tr>
               <td>Characters</td>
               <td>
-                <a href="#" onClick="setCharset(alphanumeric);return false;">AlphaNumeric</a> | 
-                <a href="#" onClick="setCharset(strong);return false;">Strong</a></br/>
+                <a href="#" onClick="setCharset(WEAK);return false;">AlphaNumeric</a> | 
+                <a href="#" onClick="setCharset(STRONG);return false;">Strong</a></br/>
                 <input class="dynamic" type="text" id="charset"/>
               </td></tr>
               </table>            
