@@ -33,11 +33,11 @@ Now for the tricky part. The bookmarklet will automatically use my demo site for
 
 Replace
 
-     "http://floating-meadow-2480.heroku.com?"
+     "http://dash.heroku.com?"
 
 with
 
-     "http://mydomain.heroku.com?"
+     "http://myappname.heroku.com?"
 
 Don't forget the quotes and the question mark.
 
