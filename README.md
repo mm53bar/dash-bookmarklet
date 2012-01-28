@@ -14,30 +14,18 @@ Then click on it whenever you need dash to get you a bookmark.
 
 ## Bonus!
 
-You can run your own version of this bookmarklet on Heroku. Install the Heroku gem first.
+You can run your own version of this bookmarklet on Github. Just fork the repo and setup your own
+Github Pages branch. Github has [some good info on this](http://pages.github.com/).
 
-     $ gem install heroku
-
-Then clone the repository and add heroku as a remote. 
-
-     $ git clone git://github.com/Shift81/dash-bookmarklet.git
-     $ cd dash-bookmarklet
-     $ heroku create -s bamboo
-
-Then push the repository to heroku and open it in your browser.
-
-     $ git push heroku master
-     $ heroku open
-
-Now for the tricky part. The bookmarklet will automatically use my demo site for dash. If you want it to point to your install of dash, you'll need to edit some code. Grab the URL for your copy of dash on Heroku. Near the bottom of public/index.html you'll find the spot where your URL should go.
+There's just one tricky part. The bookmarklet will automatically use my demo site for dash. If you want it to point to your install of dash, you'll need to edit some code. Figure out your Github pages URL for your fork. Then open up public/index.html. Near the bottom of the file you'll find the spot where your URL should go.
 
 Replace
 
-     "http://dash.heroku.com?"
+     "http://shift81.github.com/dash-bookmarklet?"
 
 with
 
-     "http://myappname.heroku.com?"
+     "http://myname.github.com/dash-bookmarklet?"
 
 Don't forget the quotes and the question mark.
 
