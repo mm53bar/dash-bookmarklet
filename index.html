@@ -1,0 +1,88 @@
+<html>
+  <head>
+    <title>Dash</title>
+
+    <meta charset="utf-8" />
+
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+
+    <!-- Included CSS Files -->
+    <link rel="stylesheet" href="css/foundation.css">
+    <link rel="stylesheet" href="css/app.css">
+
+    <!--[if lt IE 9]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+
+    <!-- IE Fix for HTML5 Tags -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="twelve columns">
+          <dl class="tabs">
+            <dd><a href="#main" class="active">Main</a></dd>
+            <dd><a href="#settings">Settings</a></dd>
+            <dd><a href="#bookmarklet">Bookmarklet</a></dd>
+          </dl>
+          <ul class="tabs-content">
+            <li class="active" id="mainTab">
+            <table cellpadding=5>
+            <tr>
+            <td>Master password</td>
+            <td><input type="password" id="master" />
+            </td>
+            </tr>
+            <tr id='urlToUseRow'>
+            <td>URL to use</td>
+            <td><input type="text" id="url" /></td>
+            </tr>
+            <tr>
+            <td>Generated Password</td>
+            <td><input id="password" type="text" style="color: #0000ff; font-weight: bold"/></td>
+            </tr>
+            </table>            
+          </li>
+          <li id="settingsTab">
+            <table cellpadding=5>
+            <tr>
+            <td>Password Length</td>
+            <td><select id="length">
+            <option value="8">8</option>
+            <option value="12">12</option>
+            <option value="16">16</option>
+            </select></td>
+            </tr>
+            <tr>
+            <td>Characters</td>
+            <td>
+            <span id="charsetToggle">
+              <a href="#weak">AlphaNumeric</a> | <a href="#strong">Strong</a>
+            </span></br/>
+            <input type="text" id="charset"/>
+            </td></tr>
+            </table>            
+          </li>
+          <li id="bookmarkletTab">
+            <center>
+            <p>Generate passwords the easy way using dash!  Drag this bookmarklet to the Links area of your browser.</p>
+            <p><a style="border: 2px groove black; padding: 0px 5px 2px; background-color: rgb(221, 221, 221); color: black; font-family: sans-serif; text-decoration: none; font-size: 10pt; margin-top: 5px;" href='javascript:(function(){var a=window,b=document,c=a.open("http://dash.heroku.com?"+b.location.hostname,"dash_popup","left="+((a.screenX||a.screenLeft)+10)+",top="+((a.screenY||a.screenTop)+10)+",height=200px,width=400px,resizable=1,alwaysRaised=1");a.setTimeout(function(){c.focus()},300)})();'>Dash!</a></p>			
+            </center>				
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Included JS Files -->
+    <script src="js/base64.js"></script>
+    <script src="js/sha256.js"></script>
+    <script src="js/foundation.js"></script>
+    <script src="js/dash.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
