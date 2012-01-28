@@ -91,4 +91,29 @@ $(document).ready(function () {
 	/* DISABLED BUTTONS ------------- */
 	/* Gives elements with a class of 'disabled' a return: false; */
 
+  /* Init dash settings */
+
+  $('#url').val(getDomain(window.location.href)); 
+
+	$('#length').val(DEFAULT_LENGTH); 
+	$('#charset').val(DEFAULT_CHARSET);
+	
+	$('#master').bind('keyup',function(){	generatePassword();	})
+  $('#url').bind('keyup',function(){ generatePassword(); })
+	$('#length').change(function(){	generatePassword();	})
+	$("#charsetToggle a").click(function(e){
+	  e.preventDefault();
+		switch($(this).attr("href")) {
+	    case "#weak":
+	      $('#charset').val(WEAK);
+	      break;
+	    case "#strong":
+	      $('#charset').val(STRONG);
+	      break;
+	  }
+	  generatePassword();
+	});
+	
+	generatePassword();
+	$('#master').focus();
 });
